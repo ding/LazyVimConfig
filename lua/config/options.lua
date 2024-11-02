@@ -5,6 +5,7 @@ local set = vim.opt
 ---------------- vim options  ----------------
 
 if vim.fn.has("macunix") then
+  set.guifont = "UDEV Gothic NF:h15"
 else
   if vim.g.nvy == 1 then -- for nvy gui client
     set.guifont = "UDEV Gothic 35NFLG:h12:Consolas"
