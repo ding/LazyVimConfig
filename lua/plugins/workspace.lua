@@ -33,8 +33,17 @@ return {
     },
   },
 
+  --{
+  --"scrooloose/nerdcommenter",
+  --},
+
+  -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
   {
-    "scrooloose/nerdcommenter",
+    "numToStr/Comment.nvim",
+    opts = {
+      -- add any options here
+    },
+    lazy = false,
   },
 
   -- use mini.starter instead of alpha
@@ -46,12 +55,13 @@ return {
   --{ import = "lazyvim.plugins.extras.editor.mini-files" },
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   { "windwp/nvim-ts-autotag" },
+  { "yorumicolors/yorumi.nvim" },
 
   --Configure LazyVim to load catppuccin
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "yorumi", -- "catppuccin",
     },
   },
   -----------------------------------------------------------------
