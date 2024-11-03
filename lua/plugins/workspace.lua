@@ -33,8 +33,17 @@ return {
     },
   },
 
+  --{
+  --"scrooloose/nerdcommenter",
+  --},
+
+  -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
   {
-    "scrooloose/nerdcommenter",
+    "numToStr/Comment.nvim",
+    opts = {
+      -- add any options here
+    },
+    lazy = false,
   },
 
   -- use mini.starter instead of alpha
@@ -74,7 +83,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "yorumi",
+      colorscheme = "yorumi", -- "catppuccin",
     },
   },
   -----------------------------------------------------------------
