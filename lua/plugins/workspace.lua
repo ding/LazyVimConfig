@@ -38,6 +38,14 @@ return {
   --},
 
   -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
+  -- Comment plugins
+  -- gcc: 行注释当前行
+  -- gbc: 使用块级别注释来注释当前行
+  -- ngcc: 使用行级别注释来注释当前行往后的几行数据
+  -- ngbc: 使用块级别注释来注释掉当前行往后的几行数据
+  -- 其它
+  --    gc2w: 注释掉最近的两个单词
+  --    在V模式下，使用gc 来在进行注释
   {
     "numToStr/Comment.nvim",
     opts = {
