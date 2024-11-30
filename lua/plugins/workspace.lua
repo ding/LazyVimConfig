@@ -94,5 +94,26 @@ return {
       colorscheme = "yorumi", -- "catppuccin",
     },
   },
+  -- An interactive and powerful Git interface for Neovim, inspired by Magit
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+
+      -- Only one of these is needed.
+      "nvim-telescope/telescope.nvim", -- optional
+      "ibhagwan/fzf-lua", -- optional
+      "echasnovski/mini.pick", -- optional
+    },
+    config = true,
+  },
+  -- Highlight changed text after any text changing operation
+  {
+    "tzachar/highlight-undo.nvim",
+    opts = {
+      ...,
+    },
+  },
   -----------------------------------------------------------------
 }
