@@ -1,8 +1,12 @@
+local utils = require("config.utils")
+
 if vim.g.neovide then
   ---- ディスプレイの設定
   -- フォントの設定
   -- vim.o.guifont = "JetBrainsMono Nerd Font:h10"
-  vim.o.guifont = "UDEV Gothic 35NFLG:h11:Consolas"
+  -- vim.o.guifont = "UDEV Gothic 35NFLG:h11:Consolas"
+  vim.o.guifont = "Explex Console NF:h11:Consolas"
+
   -- リフレッシュレート
   vim.g.neovide_refresh_rate = 60
   -- フォーカスされていないときのリフレッシュ レート
@@ -44,6 +48,7 @@ if vim.g.neovide then
   -- 粒子の種類
   vim.g.neovide_cursor_vfx_mode = "torpedo"
   -- vim.g.neovide_cursor_vfx_mode = "railgun"
+
   -- パーティクルの透明度
   vim.g.neovide_cursor_vfx_opacity = 200.0
   -- パーティクルが存続する時間
@@ -100,5 +105,5 @@ if vim.g.neovide then
   })
 
   -- プロファイラを有効にする
-  vim.g.neovide_profiler = true
+  -- vim.g.neovide_profiler = true
 end
