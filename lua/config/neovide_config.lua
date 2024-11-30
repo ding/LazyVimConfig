@@ -1,11 +1,24 @@
 local utils = require("config.utils")
 
 if vim.g.neovide then
+  ------------------------------------------------------------------------
+  --                          custom variables                          --
+  ------------------------------------------------------------------------
+  vim.g.is_win = (utils.has("win32") or utils.has("win64")) and true or false
+  vim.g.is_linux = (utils.has("unix") and (not utils.has("macunix"))) and true or false
+  vim.g.is_mac = utils.has("macunix") and true or false
+
   ---- ディスプレイの設定
   -- フォントの設定
   -- vim.o.guifont = "JetBrainsMono Nerd Font:h10"
   -- vim.o.guifont = "UDEV Gothic 35NFLG:h11:Consolas"
-  vim.o.guifont = "Explex Console NF:h11:Consolas"
+  if vim.g.is_win then
+    vim.o.guifont = "Explex Console NF:h11:Consolas"
+  elseif vim.g.is_mac then
+    vim.o.guifont = "Explex Console NF:h13:Consolas"
+  else
+    vim.o.guifont = "Explex Console NF:h11:Consolas"
+  end
 
   -- リフレッシュレート
   vim.g.neovide_refresh_rate = 60
