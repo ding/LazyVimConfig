@@ -22,7 +22,8 @@ return {
         return
       end
 
-      catppuccin.setup({
+      -- 创建一个本地变量存储主题配置
+      local theme_config = {
         flavour = "mocha", -- 可选: latte, frappe, macchiato, mocha
         background = { -- 自定义背景色
           light = "latte",
@@ -44,13 +45,14 @@ return {
           operators = {},
         },
         integrations = { -- 添加集成支持
-          -- lazy = true,
           mason = true,
           telescope = true,
           which_key = true,
-          -- 添加其他你使用的插件集成
         },
-      })
+      }
+
+      -- 设置主题配置
+      catppuccin.setup(theme_config)
 
       -- 确保在设置主题之前设置背景选项
       vim.opt.background = "dark" -- 或 "light"
@@ -65,6 +67,27 @@ return {
 
       -- 可以添加其他配置，比如特定的高亮组
       -- vim.api.nvim_set_hl(0, "Comment", { italic = true })
+
+      -- 添加主题切换功能
+      vim.keymap.set("n", "<leader>tt", function()
+        local themes = { "catppuccin", "default" }
+        local current = vim.g.colors_name
+        local next_theme = current == themes[1] and themes[2] or themes[1]
+        vim.cmd.colorscheme(next_theme)
+        vim.notify("Switched to theme: " .. next_theme)
+      end, { desc = "Toggle theme" })
+
+      -- 添加透明度切换功能
+      vim.keymap.set("n", "<leader>tb", function()
+        -- 切换透明度设置
+        theme_config.transparent_background = not theme_config.transparent_background
+        -- 重新应用主题配置
+        catppuccin.setup(theme_config)
+        -- 重新加载主题以应用更改
+        vim.cmd.colorscheme("catppuccin")
+        -- 通知用户当前状态
+        vim.notify("Background transparency: " .. (theme_config.transparent_background and "ON" or "OFF"))
+      end, { desc = "Toggle background transparency" })
     end,
   },
 
