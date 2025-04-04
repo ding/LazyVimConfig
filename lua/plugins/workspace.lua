@@ -38,6 +38,14 @@ return {
   --},
 
   -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
+  -- Comment plugins
+  -- gcc: 行注释当前行
+  -- gbc: 使用块级别注释来注释当前行
+  -- ngcc: 使用行级别注释来注释当前行往后的几行数据
+  -- ngbc: 使用块级别注释来注释掉当前行往后的几行数据
+  -- 其它
+  --    gc2w: 注释掉最近的两个单词
+  --    在V模式下，使用gc 来在进行注释
   {
     "numToStr/Comment.nvim",
     opts = {
@@ -53,15 +61,58 @@ return {
   --{ import = "lazyvim.plugins.extras.lang.json" },
 
   --{ import = "lazyvim.plugins.extras.editor.mini-files" },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "catppuccin/nvim", name = "catppuccin", lazy = true, priority = 1000 },
+
+  -- set colorscheme to tokyonight
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      style = "night",
+      transparent = false,
+      styles = {
+        sitebars = "transparent",
+        floats = "transparent",
+      },
+    },
+    config = function(_, opts)
+      require("tokyonight").setup(opts)
+      -- Dark
+      -- vim.cmd.colorscheme("tokyonight")
+    end,
+  },
+
   { "windwp/nvim-ts-autotag" },
   { "yorumicolors/yorumi.nvim" },
 
   --Configure LazyVim to load catppuccin
+  --colorscheme = "catppuccin",
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "yorumi", -- "catppuccin",
+      colorscheme = "catppuccin", -- "yorumi", -- "catppuccin",
+    },
+  },
+  -- An interactive and powerful Git interface for Neovim, inspired by Magit
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+
+      -- Only one of these is needed.
+      "nvim-telescope/telescope.nvim", -- optional
+      "ibhagwan/fzf-lua", -- optional
+      "echasnovski/mini.pick", -- optional
+    },
+    config = true,
+  },
+  -- Highlight changed text after any text changing operation
+  {
+    "tzachar/highlight-undo.nvim",
+    opts = {
+      ...,
     },
   },
   -----------------------------------------------------------------
