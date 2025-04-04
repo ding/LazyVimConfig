@@ -13,20 +13,29 @@
 local wk = require("which-key")
 
 -- 添加到现有映射
-wk.register({
-  ["<C-h>"] = { "<C-w>h", "Window left" },
-  ["<C-j>"] = { "<C-w>j", "Window down" },
-  ["<C-k>"] = { "<C-w>k", "Window up" },
-  ["<C-l>"] = { "<C-w>l", "Window right" },
-  ["<C-w>"] = {
-    name = "Window",
-    ["h"] = { "<C-w>h", "Go left" },
-    ["j"] = { "<C-w>j", "Go down" },
-    ["k"] = { "<C-w>k", "Go up" },
-    ["l"] = { "<C-w>l", "Go right" },
-    ["="] = { "<C-w>=", "Equal width" },
-    ["q"] = { "<C-w>q", "Close window" },
-    ["s"] = { "<C-w>s", "Split horizontal" },
-    ["v"] = { "<C-w>v", "Split vertical" },
-  },
+wk.add({
+  -- Window navigation
+  { "<C-h>", "<C-w>h", desc = "Window left" },
+  { "<C-j>", "<C-w>j", desc = "Window down" },
+  { "<C-k>", "<C-w>k", desc = "Window up" },
+  { "<C-l>", "<C-w>l", desc = "Window right" },
+
+  -- Window management group
+  { "<C-w>", group = "Window" },
+  { "<C-w><C-h>", "<C-w>h", desc = "Go left" },
+  { "<C-w><C-j>", "<C-w>j", desc = "Go down" },
+  { "<C-w><C-k>", "<C-w>k", desc = "Go up" },
+  { "<C-w><C-l>", "<C-w>l", desc = "Go right" },
+  { "<C-w>=", "<C-w>=", desc = "Equal width" },
+  { "<C-w>q", "<C-w>q", desc = "Close window" },
+  { "<C-w>s", "<C-w>s", desc = "Split horizontal" },
+  { "<C-w>v", "<C-w>v", desc = "Split vertical" },
+
+  -- 如果你想添加 leader 键相关的映射
+  { "<leader>", group = "+Leader" },
+  { "<leader>w", group = "Windows" },
+  { "<leader>wv", "<C-w>v", desc = "Split vertical" },
+  { "<leader>ws", "<C-w>s", desc = "Split horizontal" },
+  { "<leader>wq", "<C-w>q", desc = "Close window" },
+  { "<leader>w=", "<C-w>=", desc = "Equal width" },
 })
