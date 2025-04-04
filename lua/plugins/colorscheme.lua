@@ -163,7 +163,7 @@ return {
         local current_index = find_theme_index(current_theme)
 
         -- 计算下一个主题的索引
-        local next_index = ((current_index + 1 ) % #themes ) +1
+        local next_index = (current_index  % #themes ) +1
         local next_theme = themes[next_index]
 
         local theme_ok, _ = pcall(vim.cmd.colorscheme, next_theme)
