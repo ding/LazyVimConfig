@@ -73,5 +73,10 @@ end
 vim.opt.termguicolors = true -- 启用真彩色支持
 vim.opt.background = "dark" -- 设置深色/浅色背景
 
+-- 解决找不到 fzf, fd 等的问题.
+if vim.fn.has("macunix") then
+  -- 在你的 init.lua 或相关配置文件中
+  vim.env.PATH = vim.env.PATH .. ":/usr/local/bin:/opt/homebrew/bin"  -- 添加可能的 fzf 路径
+end
 -- ,a:Cursor means in all modes hl group Cursor is applied
 --vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:Cursor"
