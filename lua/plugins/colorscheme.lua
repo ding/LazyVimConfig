@@ -193,6 +193,18 @@ return {
         print("Current theme full name: " .. vim.inspect(current_theme))
         for i, theme in ipairs(themes) do
           -- 使用 string.match 进行模糊匹配
+          -- current_theme or "" 
+          -- 这是一个空值保护，如果 current_theme 是 nil，就使用空字符串 ""
+          -- 避免在 current_theme 为 nil 时出错
+          --
+          -- "^" .. theme
+          -- ^ 是正则表达式的开始标记，表示匹配字符串的开头
+          -- .. 是 Lua 的字符串连接操作符
+          -- 例如：如果 theme = "tokyonight"，那么 "^" .. theme 就变成 "^tokyonight"
+          --
+          -- string.match() 函数
+          -- 用于在字符串中查找模式匹配
+          -- 如果找到匹配返回 true，否则返回 false
           if string.match(current_theme or "", "^" .. theme) then
             return i
           end
