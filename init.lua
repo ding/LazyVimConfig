@@ -3,5 +3,5 @@ require("config.lazy")
 
 -- other config
 require("config.neovide_config")
-require("plugin-config.lualine-config")
-require("plugin-config.nvim-treesitter")
+
+require("config.plugins.nvim-treesitter")
