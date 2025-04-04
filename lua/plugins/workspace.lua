@@ -61,39 +61,11 @@ return {
   --{ import = "lazyvim.plugins.extras.lang.json" },
 
   --{ import = "lazyvim.plugins.extras.editor.mini-files" },
-  { "catppuccin/nvim", name = "catppuccin", lazy = true, priority = 1000 },
-
-  -- set colorscheme to tokyonight
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      style = "night",
-      transparent = false,
-      styles = {
-        sitebars = "transparent",
-        floats = "transparent",
-      },
-    },
-    config = function(_, opts)
-      require("tokyonight").setup(opts)
-      -- Dark
-      -- vim.cmd.colorscheme("tokyonight")
-    end,
-  },
+  -- { "catppuccin/nvim", name = "catppuccin", lazy = true, priority = 1000 },
 
   { "windwp/nvim-ts-autotag" },
   { "yorumicolors/yorumi.nvim" },
 
-  --Configure LazyVim to load catppuccin
-  --colorscheme = "catppuccin",
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "catppuccin", -- "yorumi", -- "catppuccin",
-    },
-  },
   -- An interactive and powerful Git interface for Neovim, inspired by Magit
   {
     "NeogitOrg/neogit",

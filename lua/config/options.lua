@@ -69,5 +69,9 @@ if vim.fn.has("nvim-0.8") == 1 then
   vim.opt.cmdheight = 0
 end
 
+-- lua/config/options.lua
+vim.opt.termguicolors = true -- 启用真彩色支持
+vim.opt.background = "dark" -- 设置深色/浅色背景
+
 -- ,a:Cursor means in all modes hl group Cursor is applied
 --vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,a:Cursor"
