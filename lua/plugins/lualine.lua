@@ -3,6 +3,9 @@
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
+  config = function()
+    require("config.plugins.lualine-config").setup()
+  end,
   -- opts = function(_, opts)
   --   local LazyVim = require("lazyvim.util")
   --   opts.sections.lualine_c[4] = {
