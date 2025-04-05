@@ -15,7 +15,7 @@ if vim.g.neovide then
   if vim.g.is_win then
     vim.o.guifont = "Explex Console NF:h11:Consolas"
   elseif vim.g.is_mac then
-    vim.o.guifont = "Explex Console NF:h13:Consolas"
+    vim.o.guifont = "Explex Console NF:h14:Consolas"
   else
     vim.o.guifont = "Explex Console NF:h11:Consolas"
   end
