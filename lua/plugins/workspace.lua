@@ -83,15 +83,49 @@ return {
     end,
   },
 
-  { "windwp/nvim-ts-autotag" },
+  -- neotest
+  {
+    "nvim-neotest/neotest",
+    cmd = "Neotest",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-neotest/neotest-jest",
+      "nvim-neotest/neotest-plenary",
+    },
+    config = function()
+      --- @diagnostic disable-next-line: missing-fields
+      require("neotest").setup {
+        adapters = {
+          require "neotest-plenary",
+        },
+      }
+    end,
+  },
+
+  -- { "windwp/nvim-ts-autotag" },
   { "yorumicolors/yorumi.nvim" },
+
+  -- for markdown table 
+  { "mattn/vim-maketable" },
+
+  -- install without yarn or npm
+  {
+      "iamcco/markdown-preview.nvim",
+      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+      ft = { "markdown" },
+      build = function() vim.fn["mkdp#util#install"]() end,
+  },
 
   --Configure LazyVim to load catppuccin
   --colorscheme = "catppuccin",
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin", -- "yorumi", -- "catppuccin",
+      colorscheme = "tokyonight", -- "catppuccin", -- "yorumi", -- "catppuccin",
     },
   },
   -----------------------------------------------------------------
