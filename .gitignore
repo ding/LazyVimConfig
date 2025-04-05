@@ -7,3 +7,6 @@ foo.*
 *.log
 data
 lazy-lock.json
+lazyvim.json
+lua/.DS_Store
+lazyvim.json
