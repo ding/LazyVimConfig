@@ -6,7 +6,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = nil,
+      colorscheme = nil, -- 只修改 colorscheme,其它配置保持默认
     },
   },
 
@@ -60,36 +60,15 @@ return {
       vim.opt.background = "dark" -- 或 "light"
 
       -- 在配置完成后立即设置为当前主题
-      local theme_ok, _ = pcall(vim.cmd.colorscheme, "catppuccin")
-      if not theme_ok then
-        vim.notify("Failed to load catppuccin theme", vim.log.levels.WARN)
-        -- 可以设置一个后备主题
-        vim.cmd.colorscheme("default")
-      end
+      -- local theme_ok, _ = pcall(vim.cmd.colorscheme, "catppuccin")
+      -- if not theme_ok then
+      --   vim.notify("Failed to load catppuccin theme", vim.log.levels.WARN)
+      --   -- 可以设置一个后备主题
+      --   vim.cmd.colorscheme("default")
+      -- end
 
       -- 可以添加其他配置，比如特定的高亮组
       -- vim.api.nvim_set_hl(0, "Comment", { italic = true })
-
-      -- -- 添加主题切换功能
-      -- vim.keymap.set("n", "<leader>tt", function()
-      --   local themes = { "catppuccin", "default" }
-      --   local current = vim.g.colors_name
-      --   local next_theme = current == themes[1] and themes[2] or themes[1]
-      --   vim.cmd.colorscheme(next_theme)
-      --   vim.notify("Switched to theme: " .. next_theme)
-      -- end, { desc = "Toggle theme" })
-      --
-      -- -- 添加透明度切换功能
-      -- vim.keymap.set("n", "<leader>tb", function()
-      --   -- 切换透明度设置
-      --   theme_config.transparent_background = not theme_config.transparent_background
-      --   -- 重新应用主题配置
-      --   catppuccin.setup(theme_config)
-      --   -- 重新加载主题以应用更改
-      --   vim.cmd.colorscheme("catppuccin")
-      --   -- 通知用户当前状态
-      --   vim.notify("Background transparency: " .. (theme_config.transparent_background and "ON" or "OFF"))
-      -- end, { desc = "Toggle background transparency" })
     end,
   },
 
@@ -171,6 +150,60 @@ return {
         overrides = {},
         dim_inactive = false,
       })
+    end,
+  },
+
+  -- Kanagawa theme
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+    priority = 900,
+    config = function()
+      require("kanagawa").setup({
+        compile = false, -- enable compiling the colorscheme
+        undercurl = true, -- enable undercurls
+        commentStyle = { italic = true },
+        functionStyle = {},
+        keywordStyle = { italic = true },
+        statementStyle = { bold = true },
+        typeStyle = {},
+        transparent = false, -- do not set background color
+        dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+        terminalColors = true, -- define vim.g.terminal_color_{0,17}
+        colors = { -- add/modify theme and palette colors
+          palette = {},
+          theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+        },
+        overrides = function(colors) -- add/modify highlights
+          return {}
+        end,
+        theme = "wave", -- Load "wave" theme , dragon, lotus
+        background = { -- map the value of 'background' option to a theme
+          dark = "wave", -- try "dragon" !
+          light = "lotus",
+        },
+      })
+    end,
+  },
+
+  -- 设置具体主题(已经确认不会覆盖LazyVim其它默认配置)
+  {
+    "LazyVim/LazyVim",
+    opts = function(_, opts)
+      local function set_colorscheme(theme)
+        local status_ok, _ = pcall(vim.cmd.colorscheme, theme)
+        if status_ok then
+          opts.colorscheme = theme
+        else
+          vim.notify("Failed to load colorscheme" .. theme, vim.log.levels.WARN)
+          -- 可以设置一个后备主题
+          opts.colorscheme = "default"
+        end
+      end
+
+      -- NOTE: 实际主题在这边进行设置
+      -- set_colorscheme("catppuccin")
+      set_colorscheme("kanagawa")
     end,
   },
 }
