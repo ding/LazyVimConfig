@@ -59,14 +59,6 @@ return {
       -- 确保在设置主题之前设置背景选项
       vim.opt.background = "dark" -- 或 "light"
 
-      -- 在配置完成后立即设置为当前主题
-      -- local theme_ok, _ = pcall(vim.cmd.colorscheme, "catppuccin")
-      -- if not theme_ok then
-      --   vim.notify("Failed to load catppuccin theme", vim.log.levels.WARN)
-      --   -- 可以设置一个后备主题
-      --   vim.cmd.colorscheme("default")
-      -- end
-
       -- 可以添加其他配置，比如特定的高亮组
       -- vim.api.nvim_set_hl(0, "Comment", { italic = true })
     end,
