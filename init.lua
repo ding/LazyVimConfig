@@ -2,9 +2,9 @@
 require("config.lazy")
 
 -- other config
-require("config.options")
-require("config.autocmds")
-require("config.keymaps")
+-- require("config.options")
+-- require("config.autocmds")
+-- require("config.keymaps")
 
 require("config.neovide_config")
 require("config.plugins.nvim-treesitter")
