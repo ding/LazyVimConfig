@@ -189,7 +189,7 @@ return {
         else
           vim.notify("Failed to load colorscheme" .. theme, vim.log.levels.WARN)
           -- 可以设置一个后备主题
-          opts.colorscheme = "default"
+          opts.colorscheme = "vim"
         end
       end
 
