@@ -13,7 +13,8 @@ if vim.g.neovide then
   -- vim.o.guifont = "JetBrainsMono Nerd Font:h10"
   -- vim.o.guifont = "UDEV Gothic 35NFLG:h11:Consolas"
   if vim.g.is_win then
-    vim.o.guifont = "Explex Console NF:h11:Consolas"
+    -- vim.o.guifont = "Explex Console NF:h11:Consolas"
+    vim.o.guifont = "Maple Mono Nf CN:h11:Consolas"
   elseif vim.g.is_mac then
     vim.o.guifont = "Explex Console NF:h14:Consolas"
   else
