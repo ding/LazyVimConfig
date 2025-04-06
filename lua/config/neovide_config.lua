@@ -90,8 +90,12 @@ if vim.g.neovide then
   vim.g.neovide_cursor_vfx_particle_curl = 1.0
 
   --- Neovideを透明にする設定
-  -- 不透明度の設定
-  vim.g.neovide_transparency = 0.9
+  -- 不透明度の設定(后续会被废弃,暂时不使用)
+  -- vim.g.neovide_transparency = 0.9
+  -- g:neovide_opacity should be 0 if you want to unify transparency of content and title bar.
+  -- vim.g.neovide_opacity = 0
+  -- vim.g.transparency = 0.9
+
   -- 境界線を表示(不透明なウィンドウの周囲にのみ灰色の境界線を表示)
   vim.g.neovide_show_border = true
 
