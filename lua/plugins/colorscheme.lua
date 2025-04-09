@@ -15,7 +15,7 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000, -- 确保在其他插件之前加载
-    lazy = false, -- 确保立即加载
+    lazy = false,    -- 确保立即加载
     config = function()
       -- 错误处理
       local status_ok, catppuccin = pcall(require, "catppuccin")
@@ -27,12 +27,12 @@ return {
       -- 创建一个本地变量存储主题配置
       local theme_config = {
         flavour = "mocha", -- 可选: latte, frappe, macchiato, mocha
-        background = { -- 自定义背景色
+        background = {     -- 自定义背景色
           light = "latte",
           dark = "mocha",
         },
         transparent_background = false, -- 透明背景选项
-        styles = { -- 自定义样式
+        styles = {                      -- 自定义样式
           comments = { "italic" },
           conditionals = { "italic" },
           loops = {},
@@ -137,7 +137,7 @@ return {
         invert_tabline = false,
         invert_intend_guides = false,
         inverse = true, -- invert background for search, diffs, statuslines and errors
-        contrast = "", -- can be "hard", "soft" or empty string
+        contrast = "",  -- can be "hard", "soft" or empty string
         palette_overrides = {},
         overrides = {},
         dim_inactive = false,
@@ -152,31 +152,40 @@ return {
     priority = 900,
     config = function()
       require("kanagawa").setup({
-        compile = false, -- enable compiling the colorscheme
+        compile = false,  -- enable compiling the colorscheme
         undercurl = true, -- enable undercurls
         commentStyle = { italic = true },
         functionStyle = {},
         keywordStyle = { italic = true },
         statementStyle = { bold = true },
         typeStyle = {},
-        transparent = false, -- do not set background color
-        dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+        transparent = false,   -- do not set background color
+        dimInactive = false,   -- dim inactive window `:h hl-NormalNC`
         terminalColors = true, -- define vim.g.terminal_color_{0,17}
-        colors = { -- add/modify theme and palette colors
+        colors = {             -- add/modify theme and palette colors
           palette = {},
           theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
         },
         overrides = function(colors) -- add/modify highlights
           return {}
         end,
-        theme = "wave", -- Load "wave" theme , dragon, lotus
-        background = { -- map the value of 'background' option to a theme
+        theme = "wave",  -- Load "wave" theme , dragon, lotus
+        background = {   -- map the value of 'background' option to a theme
           dark = "wave", -- try "dragon" !
           light = "lotus",
         },
       })
     end,
   },
+
+  -- A list of colorscheme plugin you may want to try. Find what suits you.
+  { "navarasu/onedark.nvim",       lazy = true },
+
+  { "sainnhe/gruvbox-material",    lazy = true },
+  { "sainnhe/everforest",          lazy = true },
+  { "EdenEast/nightfox.nvim",      lazy = true },
+  { "olimorris/onedarkpro.nvim",   lazy = true },
+  { "marko-cerovac/material.nvim", lazy = true },
 
   -- 设置具体主题(已经确认不会覆盖LazyVim其它默认配置)
   {
