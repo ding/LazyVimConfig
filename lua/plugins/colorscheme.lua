@@ -6,7 +6,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = nil,
+      colorscheme = nil, -- 只修改 colorscheme,其它配置保持默认
     },
   },
 
@@ -15,7 +15,7 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000, -- 确保在其他插件之前加载
-    lazy = false, -- 确保立即加载
+    lazy = false,    -- 确保立即加载
     config = function()
       -- 错误处理
       local status_ok, catppuccin = pcall(require, "catppuccin")
@@ -27,12 +27,12 @@ return {
       -- 创建一个本地变量存储主题配置
       local theme_config = {
         flavour = "mocha", -- 可选: latte, frappe, macchiato, mocha
-        background = { -- 自定义背景色
+        background = {     -- 自定义背景色
           light = "latte",
           dark = "mocha",
         },
         transparent_background = false, -- 透明背景选项
-        styles = { -- 自定义样式
+        styles = {                      -- 自定义样式
           comments = { "italic" },
           conditionals = { "italic" },
           loops = {},
@@ -59,37 +59,8 @@ return {
       -- 确保在设置主题之前设置背景选项
       vim.opt.background = "dark" -- 或 "light"
 
-      -- 在配置完成后立即设置为当前主题
-      local theme_ok, _ = pcall(vim.cmd.colorscheme, "catppuccin")
-      if not theme_ok then
-        vim.notify("Failed to load catppuccin theme", vim.log.levels.WARN)
-        -- 可以设置一个后备主题
-        vim.cmd.colorscheme("default")
-      end
-
       -- 可以添加其他配置，比如特定的高亮组
       -- vim.api.nvim_set_hl(0, "Comment", { italic = true })
-
-      -- -- 添加主题切换功能
-      -- vim.keymap.set("n", "<leader>tt", function()
-      --   local themes = { "catppuccin", "default" }
-      --   local current = vim.g.colors_name
-      --   local next_theme = current == themes[1] and themes[2] or themes[1]
-      --   vim.cmd.colorscheme(next_theme)
-      --   vim.notify("Switched to theme: " .. next_theme)
-      -- end, { desc = "Toggle theme" })
-      --
-      -- -- 添加透明度切换功能
-      -- vim.keymap.set("n", "<leader>tb", function()
-      --   -- 切换透明度设置
-      --   theme_config.transparent_background = not theme_config.transparent_background
-      --   -- 重新应用主题配置
-      --   catppuccin.setup(theme_config)
-      --   -- 重新加载主题以应用更改
-      --   vim.cmd.colorscheme("catppuccin")
-      --   -- 通知用户当前状态
-      --   vim.notify("Background transparency: " .. (theme_config.transparent_background and "ON" or "OFF"))
-      -- end, { desc = "Toggle background transparency" })
     end,
   },
 
@@ -166,7 +137,7 @@ return {
         invert_tabline = false,
         invert_intend_guides = false,
         inverse = true, -- invert background for search, diffs, statuslines and errors
-        contrast = "", -- can be "hard", "soft" or empty string
+        contrast = "",  -- can be "hard", "soft" or empty string
         palette_overrides = {},
         overrides = {},
         dim_inactive = false,
@@ -174,84 +145,66 @@ return {
     end,
   },
 
-  -- 主题管理和切换功能
-  -- 会导致LazyExtras失效，先将此功能屏蔽
-  -- {
-  --   "LazyVim/LazyVim",
-  --   optional = true,
-  --   config = function()
-  --     -- 设置默认主题
-  --     vim.cmd.colorscheme("catppuccin")
-  --
-  --     -- 主题列表
-  --     local themes = {
-  --       "catppuccin",
-  --       "tokyonight",
-  --       "gruvbox",
-  --     }
-  --
-  --     -- 改进的主题匹配函数
-  --     local function find_theme_index(current_theme)
-  --       -- 打印当前主题名称（调试用）
-  --       print("Current theme full name: " .. vim.inspect(current_theme))
-  --       for i, theme in ipairs(themes) do
-  --         -- 使用 string.match 进行模糊匹配
-  --         -- current_theme or ""
-  --         -- 这是一个空值保护，如果 current_theme 是 nil，就使用空字符串 ""
-  --         -- 避免在 current_theme 为 nil 时出错
-  --         --
-  --         -- "^" .. theme
-  --         -- ^ 是正则表达式的开始标记，表示匹配字符串的开头
-  --         -- .. 是 Lua 的字符串连接操作符
-  --         -- 例如：如果 theme = "tokyonight"，那么 "^" .. theme 就变成 "^tokyonight"
-  --         --
-  --         -- string.match() 函数
-  --         -- 用于在字符串中查找模式匹配
-  --         -- 如果找到匹配返回 true，否则返回 false
-  --         if string.match(current_theme or "", "^" .. theme) then
-  --           return i
-  --         end
-  --       end
-  --       return 1 -- 如果没找到匹配，返回默认索引
-  --     end
-  --
-  --     -- 主题切换功能
-  --     vim.keymap.set("n", "<leader>tt", function()
-  --       -- 获取当前主题
-  --       local current_theme = vim.g.colors_name
-  --       -- Get current theme's index
-  --       local current_index = find_theme_index(current_theme)
-  --
-  --       -- 计算下一个主题的索引
-  --       local next_index = (current_index % #themes) + 1
-  --       local next_theme = themes[next_index]
-  --
-  --       local theme_ok, _ = pcall(vim.cmd.colorscheme, next_theme)
-  --       if theme_ok then
-  --         vim.notify("Switched to theme: " .. next_theme)
-  --       else
-  --         vim.notify("Failed to switch to theme: " .. next_theme, vim.log.levels.ERROR)
-  --       end
-  --     end, { desc = "Toggle between themes" })
-  --
-  --     -- 透明度切换功能
-  --     -- vim.keymap.set("n", "<leader>tb", function()
-  --     --   local current_theme = vim.g.colors_name
-  --     --   if current_theme == "catppuccin" then
-  --     --     local config = require("catppuccin.config").options
-  --     --     config.transparent_background = not config.transparent_background
-  --     --     vim.cmd.colorscheme("catppuccin")
-  --     --   elseif current_theme == "tokyonight" then
-  --     --     local config = require("tokyonight.config").options
-  --     --     config.transparent = not config.transparent
-  --     --     vim.cmd.colorscheme("tokyonight")
-  --     --   elseif current_theme == "gruvbox" then
-  --     --     local config = require("gruvbox").config
-  --     --     config.transparent_mode = not config.transparent_mode
-  --     --     vim.cmd.colorscheme("gruvbox")
-  --     --   end
-  --     --   vim.notify("Toggled transparency for " .. current_theme)
-  --     -- end, { desc = "Toggle background transparency" })
-  --   end,
-  -- },
+  -- Kanagawa theme
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+    priority = 900,
+    config = function()
+      require("kanagawa").setup({
+        compile = false,  -- enable compiling the colorscheme
+        undercurl = true, -- enable undercurls
+        commentStyle = { italic = true },
+        functionStyle = {},
+        keywordStyle = { italic = true },
+        statementStyle = { bold = true },
+        typeStyle = {},
+        transparent = false,   -- do not set background color
+        dimInactive = false,   -- dim inactive window `:h hl-NormalNC`
+        terminalColors = true, -- define vim.g.terminal_color_{0,17}
+        colors = {             -- add/modify theme and palette colors
+          palette = {},
+          theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+        },
+        overrides = function(colors) -- add/modify highlights
+          return {}
+        end,
+        theme = "wave",  -- Load "wave" theme , dragon, lotus
+        background = {   -- map the value of 'background' option to a theme
+          dark = "wave", -- try "dragon" !
+          light = "lotus",
+        },
+      })
+    end,
+  },
+
+  -- A list of colorscheme plugin you may want to try. Find what suits you.
+  { "navarasu/onedark.nvim",       lazy = true },
+
+  { "sainnhe/gruvbox-material",    lazy = true },
+  { "sainnhe/everforest",          lazy = true },
+  { "EdenEast/nightfox.nvim",      lazy = true },
+  { "olimorris/onedarkpro.nvim",   lazy = true },
+  { "marko-cerovac/material.nvim", lazy = true },
+
+  -- 设置具体主题(已经确认不会覆盖LazyVim其它默认配置)
+  {
+    "LazyVim/LazyVim",
+    opts = function(_, opts)
+      local function set_colorscheme(theme)
+        local status_ok, _ = pcall(vim.cmd.colorscheme, theme)
+        if status_ok then
+          opts.colorscheme = theme
+        else
+          vim.notify("Failed to load colorscheme" .. theme, vim.log.levels.WARN)
+          -- 可以设置一个后备主题
+          opts.colorscheme = "vim"
+        end
+      end
+
+      -- NOTE: 实际主题在这边进行设置
+      -- set_colorscheme("catppuccin")
+      set_colorscheme("kanagawa")
+    end,
+  },
 }
