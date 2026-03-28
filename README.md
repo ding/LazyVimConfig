@@ -21,6 +21,36 @@ Personal Neovim configuration built on top of `LazyVim` and `lazy.nvim`.
 - `git` is required for bootstrapping plugins.
 - Optional tools such as `npx`, `fzf`, and `fd` improve plugin behavior.
 
+## Windows Notes
+- Supported in principle, but you still need the external tools used by your enabled plugins.
+- Recommended base tools on Windows:
+  - `git`
+  - `python3` or `python`
+  - `npx` for `markdown-preview.nvim`
+  - `fzf` and `fd` for fuzzy finding workflows
+  - `lazygit` if you want the git shortcuts exposed by `snacks.nvim`
+- Clipboard integration uses `unnamedplus`. This usually works in native Windows Neovim, but may behave differently in WSL or remote terminal setups.
+- GUI font settings now fall back across several candidates, but if you want consistent rendering in Neovide, install at least one suitable monospaced font such as `Maple Mono NF`, `Cascadia Mono NF`, or `Consolas`.
+
+## Quick Checks
+- Check general health:
+
+```bash
+nvim --headless "+checkhealth" +qa
+```
+
+- Check Tree-sitter specifically:
+
+```bash
+nvim --headless "+checkhealth vim.treesitter" +qa
+```
+
+- Check Python provider:
+
+```bash
+nvim --headless "+checkhealth provider" +qa
+```
+
 ## Usage
 Clone or link this directory to `~/.config/nvim`, then start Neovim:
 
