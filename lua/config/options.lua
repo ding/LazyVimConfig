@@ -7,6 +7,17 @@ local api = vim.api
 
 local utils = require("config.utils")
 
+local function try_set_guifont(fonts)
+    for _, font in ipairs(fonts) do
+        local ok = pcall(function()
+            vim.opt.guifont = font
+        end)
+        if ok then
+            return font
+        end
+    end
+end
+
 ------------------------------------------------------------------------
 --                          custom variables                          --
 ------------------------------------------------------------------------
@@ -38,16 +49,25 @@ vim.g.mapleader = ","
 ---------------- vim options  ----------------
 
 if vim.fn.has("macunix") then
-    vim.opt.guifont = "UDEV Gothic NF:h12"
+    try_set_guifont({ "UDEV Gothic NF:h12", "Monaco:h12", "Menlo:h12" })
 elseif vim.g.nvy == 1 then -- for nvy gui client
-    set.guifont = "UDEV Gothic 35NFLG:h10:Consolas"
-    -- can not use Sarasa Nerd Font in nvy GUI.
-    -- vim.opt.guifont = "Sarasa Fixed CL Nerd Font SemiB:h12:Consolas"
+    try_set_guifont({
+        "UDEV Gothic 35NFLG:h10:Consolas",
+        "Maple Mono NF CN:h10:Consolas",
+        "Consolas:h10",
+    })
 elseif vim.fn.has("gui_running") then
-    --vim.opt.guifont = "UDEV Gothic 35NFLG:h10:Consolas"
-    set.guifont = "Sarasa Fixed CL Nerd Font SemiB:h10:Consolas"
+    try_set_guifont({
+        "Sarasa Fixed CL Nerd Font SemiB:h10:Consolas",
+        "Maple Mono NF CN:h10:Consolas",
+        "Consolas:h10",
+    })
 else
-    set.guifont = "Sarasa Fixed CL Nerd Font SemiB:h10:Consolas"
+    try_set_guifont({
+        "Sarasa Fixed CL Nerd Font SemiB:h10:Consolas",
+        "Maple Mono NF CN:h10:Consolas",
+        "Consolas:h10",
+    })
 end
 
 set.scrolloff = 10
