@@ -6,10 +6,9 @@
 -- nmap ga <Plug>(EasyAlign)
 
 return {
-  "junegunn/vim-easy-align",
-  keys = { "<Plug>(EasyAlign)" },
-  setup = function()
-    vim.keymap.set("x", "ga", "<Plug>(EasyAlign)")
-    vim.keymap.set("n", "ga", "<Plug>(EasyAlign)")
-  end,
+    "junegunn/vim-easy-align",
+    keys = {
+        { "ga", "<Plug>(EasyAlign)", mode = "x", desc = "Easy Align" },
+        { "ga", "<Plug>(EasyAlign)", mode = "n", desc = "Easy Align" },
+    },
 }
