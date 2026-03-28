@@ -7,4 +7,4 @@ require("config.lazy")
 -- require("config.keymaps")
 
 require("config.neovide_config")
-require("config.plugins.nvim-treesitter")
+-- require("config.plugins.nvim-treesitter")
